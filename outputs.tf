@@ -3,7 +3,12 @@ output "count" {
   value       = local.gateway_count
 }
 
-output "ids" {
-  description = "List of ids of gateways created"
-  value       = ibm_is_public_gateway.vpc_gateway[*].id
+output "gateway_ids" {
+  value       = local.gateway_ids
+  description = "List of ids of the gateways created"
+}
+
+output "gateways" {
+  description = "List of ids and zones of gateways created"
+  value       = [ for id in local.gateway_ids: {id = id, zone = element(local.vpc_zone_names, index(local.gateway_ids, id))} ]
 }
