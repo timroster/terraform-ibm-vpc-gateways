@@ -26,6 +26,32 @@ versions:
     #        - source: github.com/ibm-garage-cloud/terraform-k8s-dashboard
     #          version: ">= 1.6.0"
     variables: [{name: resource_group_id, type: string}, {name: region, type: string}, {name: ibmcloud_api_key, type: string}, {name: vpc_name, type: string}, {name: subnet_count, type: string}]
+    version: v1.1.0
+    outputs:
+      - name: count
+        description: The number of gateways created
+      - name: ids
+        description: List of ids of gateways created
+  - platforms:
+      - kubernetes
+      - ocp3
+      - ocp4
+    dependencies: []
+    #    - id: cluster
+    #      refs:
+    #        - source: github.com/ibm-garage-cloud/terraform-ibm-container-platform
+    #          version: ">= 1.7.0"
+    #        - source: github.com/ibm-garage-cloud/terraform-k8s-ocp-cluster
+    #          version: ">= 2.0.0"
+    #    - id: namespace
+    #      refs:
+    #        - source: github.com/ibm-garage-cloud/terraform-k8s-namespace
+    #          version: ">= 2.1.0"
+    #    - id: dashboard
+    #      refs:
+    #        - source: github.com/ibm-garage-cloud/terraform-k8s-dashboard
+    #          version: ">= 1.6.0"
+    variables: [{name: resource_group_id, type: string}, {name: region, type: string}, {name: ibmcloud_api_key, type: string}, {name: vpc_name, type: string}, {name: subnet_count, type: string}]
     version: v1.0.0
     outputs:
       - name: gateway_count
