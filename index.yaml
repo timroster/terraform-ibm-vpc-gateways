@@ -11,6 +11,44 @@ versions:
     dependencies:
       - id: resource-group
         refs:
+          - source: github.com/cloud-native-toolkit/terraform-ibm-resource-group
+            version: ">= 1.0.0"
+      - id: vpc
+        refs:
+          - source: github.com/cloud-native-toolkit/terraform-ibm-vpc
+            version: ">= 1.0.0"
+    variables:
+      - name: resource_group_id
+        moduleRef:
+          id: resource-group
+          output: id
+        type: string
+      - name: vpc_name
+        moduleRef:
+          id: vpc
+          output: name
+        type: string
+      - name: region
+        scope: global
+        type: string
+      - name: ibmcloud_api_key
+        scope: global
+        type: string
+      - name: subnet_count
+        scope: ignore
+        type: string
+    version: v1.2.1
+    outputs:
+      - name: count
+        description: The number of gateways created
+      - name: gateway_ids
+        description: List of ids of the gateways created
+      - name: gateways
+        description: List of ids and zones of gateways created
+  - platforms: []
+    dependencies:
+      - id: resource-group
+        refs:
           - soure: github.com/cloud-native-toolkit/terraform-ibm-resource-group
             version: ">= 1.0.0"
       - id: vpc
