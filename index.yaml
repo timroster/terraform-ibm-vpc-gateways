@@ -23,6 +23,51 @@ versions:
           id: resource-group
           output: id
         type: string
+        description: The id of the IBM Cloud resource group where the VPC gateways will be created.
+      - name: vpc_name
+        moduleRef:
+          id: vpc
+          output: name
+        type: string
+        description: The name of the vpc instance
+      - name: region
+        scope: global
+        type: string
+        description: The IBM Cloud region where the cluster will be/has been installed.
+      - name: ibmcloud_api_key
+        scope: global
+        type: string
+        description: The IBM Cloud api token
+      - name: subnet_count
+        scope: ignore
+        type: number
+        description: The total number of subnets that will be provisioned in the VPC instance. This value will be used to determine how many gateways to create. At most, three gateways can be created (one for each zone) so the default should suffice in most cases. However, it might create more gateways than needed for small deployments in which case a number less than three can be used.
+        default: 3
+        optional: true
+    version: v1.2.2
+    outputs:
+      - name: count
+        description: The number of gateways created
+      - name: gateway_ids
+        description: List of ids of the gateways created
+      - name: gateways
+        description: List of ids and zones of gateways created
+  - platforms: []
+    dependencies:
+      - id: resource-group
+        refs:
+          - source: github.com/cloud-native-toolkit/terraform-ibm-resource-group
+            version: ">= 1.0.0"
+      - id: vpc
+        refs:
+          - source: github.com/cloud-native-toolkit/terraform-ibm-vpc
+            version: ">= 1.0.0"
+    variables:
+      - name: resource_group_id
+        moduleRef:
+          id: resource-group
+          output: id
+        type: string
       - name: vpc_name
         moduleRef:
           id: vpc
