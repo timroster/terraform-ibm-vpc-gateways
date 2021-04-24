@@ -25,7 +25,7 @@ This module makes use of the output from other modules:
 
 ```hcl-terraform
 module "gateways" {
-  source = "github.com/cloud-native-toolkit/terraform-ibm-vpc-gateways.git?ref=1.0.0"
+  source = "github.com/cloud-native-toolkit/terraform-ibm-vpc-gateways.git?ref=1.2.2"
 
   resource_group_id = module.resource_group.id
   region            = var.region
