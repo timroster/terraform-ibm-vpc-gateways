@@ -19,6 +19,11 @@ variable "vpc_name" {
   description = "The name of the vpc instance"
 }
 
+variable "vpc_id" {
+  type        = string
+  description = "The id of the vpc instance"
+}
+
 variable "subnet_count" {
   type        = number
   description = "The total number of subnets that will be provisioned in the VPC instance. This value will be used to determine how many gateways to create. At most, three gateways can be created (one for each zone) so the default should suffice in most cases. However, it might create more gateways than needed for small deployments in which case a number less than three can be used."
