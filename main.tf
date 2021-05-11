@@ -12,11 +12,17 @@ resource null_resource print_names {
   }
 }
 
+data ibm_is_vpc vpc {
+  depends_on = [null_resource.print_names]
+
+  name = var.vpc_name
+}
+
 resource ibm_is_public_gateway vpc_gateway {
   count = local.gateway_count
 
   name           = "${var.vpc_name}-gw-${local.vpc_zone_names[count.index]}"
-  vpc            = var.vpc_id
+  vpc            = data.ibm_is_vpc.vpc.id
   zone           = local.vpc_zone_names[count.index]
   resource_group = var.resource_group_id
 
