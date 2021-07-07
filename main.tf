@@ -1,9 +1,9 @@
 
 locals {
   zone_count     = 3
-  vpc_zone_names = [ for index in range(var.subnet_count): "${var.region}-${(index % local.zone_count) + 1}" ]
-  gateway_count  = min(local.zone_count, var.subnet_count)
-  gateway_ids    = ibm_is_public_gateway.vpc_gateway[*].id
+  vpc_zone_names = [ for index in range(local.zone_count): "${var.region}-${(index % local.zone_count) + 1}" ]
+  gateway_count  = local.zone_count
+  gateway_ids    = data.ibm_is_public_gateway.vpc_gateway[*].id
 }
 
 resource null_resource print_names {
@@ -19,7 +19,7 @@ data ibm_is_vpc vpc {
 }
 
 resource ibm_is_public_gateway vpc_gateway {
-  count = local.gateway_count
+  count = var.provision ? local.gateway_count : 0
 
   name           = "${var.vpc_name}-gw-${local.vpc_zone_names[count.index]}"
   vpc            = data.ibm_is_vpc.vpc.id
@@ -31,4 +31,12 @@ resource ibm_is_public_gateway vpc_gateway {
     create  = "15m"
     delete = "15m"
   }
+}
+
+data ibm_is_public_gateway vpc_gateway {
+  depends_on = [ibm_is_public_gateway.vpc_gateway]
+  count = local.gateway_count
+
+  name           = "${var.vpc_name}-gw-${local.vpc_zone_names[count.index]}"
+  resource_group = var.resource_group_id
 }
