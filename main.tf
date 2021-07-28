@@ -8,7 +8,7 @@ locals {
 
 resource null_resource print_names {
   provisioner "local-exec" {
-    command = "echo 'VPC name: ${var.vpc_name}'"
+    command = "echo 'VPC name: ${var.vpc_name != null ? var.vpc_name : "null"}'"
   }
 }
 
