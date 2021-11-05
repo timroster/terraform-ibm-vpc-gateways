@@ -2,6 +2,8 @@
 
 Terraform module to provision public gateways for an existing VPC instance. Public gateways are restricted to having a single gateway per zone, which means no more than three gateways can be created. If fewer than three zones are required then the `subnet_count` can be set to the appropriate value.
 
+**Note:** This module follows the Terraform conventions regarding how provider configuration is defined within the Terraform template and passed into the module - https://www.terraform.io/docs/language/modules/develop/providers.html. The default provider configuration flows through to the module. If different configuration is required for a module, it can be explicitly passed in the `providers` block of the module - https://www.terraform.io/docs/language/modules/develop/providers.html#passing-providers-explicitly.
+
 ## Software dependencies
 
 The module depends on the following software components:
@@ -24,12 +26,25 @@ This module makes use of the output from other modules:
 ## Example usage
 
 ```hcl-terraform
+terraform {
+  required_providers {
+    ibm = {
+      source = "ibm-cloud/ibm"
+    }
+  }
+  required_version = ">= 0.13"
+}
+
+provider "ibm" {
+  ibmcloud_api_key = var.ibmcloud_api_key
+  region = var.region
+}
+
 module "gateways" {
   source = "github.com/cloud-native-toolkit/terraform-ibm-vpc-gateways.git?ref=1.0.0"
 
   resource_group_id = module.resource_group.id
   region            = var.region
-  ibmcloud_api_key  = var.ibmcloud_api_key
   vpc_name          = module.vpc.name
   subnet_count      = var.vpc_subnet_count
 }

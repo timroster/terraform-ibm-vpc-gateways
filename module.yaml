@@ -7,6 +7,9 @@ tags:
     - public gateway
 versions:
 - platforms: []
+  providers:
+    - name: ibm
+      source: "ibm-cloud/ibm"
   dependencies:
     - id: resource-group
       refs:
