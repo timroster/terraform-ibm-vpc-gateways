@@ -30,7 +30,5 @@ versions:
         output: name
     - name: region
       scope: global
-    - name: ibmcloud_api_key
-      scope: global
     - name: subnet_count
       scope: ignore
