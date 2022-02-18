@@ -30,5 +30,3 @@ versions:
         output: name
     - name: region
       scope: global
-    - name: subnet_count
-      scope: ignore

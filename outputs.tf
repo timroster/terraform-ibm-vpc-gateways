@@ -12,3 +12,7 @@ output "gateways" {
   description = "List of ids and zones of gateways created"
   value       = [ for id in local.gateway_ids: {id = id, zone = element(local.vpc_zone_names, index(local.gateway_ids, id))} ]
 }
+
+output "enabled" {
+  value = var.enabled
+}

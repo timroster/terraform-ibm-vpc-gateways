@@ -10,7 +10,7 @@ The module depends on the following software components:
 
 ### Command-line tools
 
-- terraform - v13
+- terraform - v0.15
 
 ### Terraform providers
 
@@ -32,7 +32,7 @@ terraform {
       source = "ibm-cloud/ibm"
     }
   }
-  required_version = ">= 0.13"
+  required_version = ">= 0.15"
 }
 
 provider "ibm" {
