@@ -41,7 +41,7 @@ provider "ibm" {
 }
 
 module "gateways" {
-  source = "github.com/cloud-native-toolkit/terraform-ibm-vpc-gateways.git?ref=1.0.0"
+  source = "cloud-native-toolkit/vpc-gateways/ibm"
 
   resource_group_id = module.resource_group.id
   region            = var.region
