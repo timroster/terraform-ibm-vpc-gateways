@@ -19,9 +19,3 @@ variable "provision" {
   description = "Flag indicating that the gateway must be provisioned"
   default     = true
 }
-
-variable "enabled" {
-  type        = bool
-  description = "Flag to indicate that IBM VPC module should be enabled"
-  default     = true
-}

@@ -4,5 +4,4 @@ module "vpc" {
   resource_group_name = module.resource_group.name
   region              = var.region
   name_prefix         = var.name_prefix
-  enabled             = var.enabled
 }
