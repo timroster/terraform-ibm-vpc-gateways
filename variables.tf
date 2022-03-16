@@ -19,3 +19,9 @@ variable "provision" {
   description = "Flag indicating that the gateway must be provisioned"
   default     = true
 }
+
+variable "tags" {
+  type        = list(string)
+  default     = []
+  description = "Tags that should be added to the instance"
+}

@@ -26,6 +26,7 @@ resource ibm_is_public_gateway vpc_gateway {
   vpc            = local.vpc_id
   zone           = local.vpc_zone_names[count.index]
   resource_group = var.resource_group_id
+  tags           = var.tags
 
   //User can configure timeouts
   timeouts {
